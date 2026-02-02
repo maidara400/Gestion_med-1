@@ -22,7 +22,7 @@ class AuthController extends Controller
         ]);
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect('/dashboard');
+            return redirect('dashboard');
         }
         return back()->withErrors([
             'email' => 'Identifiants incorrects.',

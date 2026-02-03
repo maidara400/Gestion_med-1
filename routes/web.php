@@ -86,6 +86,20 @@ Route::post('/logout', [C\AuthController::class, 'logout'])->name('logout')->mid
 
 
 
+// crud routes Admin
+
+Route::prefix('admin')
+    ->middleware(['auth', 'role:admin'])
+    ->controller(\App\Http\Controllers\AdminController::class)
+    ->name('admin.')
+    ->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::put('/update/{id}', 'update')->name('update');
+    Route::delete('/delete/{id}', 'destroy')->name('delete');
+});
 
 
 
@@ -93,10 +107,7 @@ Route::post('/logout', [C\AuthController::class, 'logout'])->name('logout')->mid
 
 
 
-
-
-
-
+// Routes Crud Medecin
 Route::prefix('medecin')
     ->middleware(['auth', 'role:admin'])
     ->controller(\App\Http\Controllers\MedecinController::class)
@@ -109,6 +120,8 @@ Route::prefix('medecin')
     Route::put('/update/{id}', 'update')->name('update');
     Route::delete('/delete/{id}', 'destroy')->name('delete');
 });
+
+
 
 
 
